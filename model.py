@@ -258,8 +258,13 @@ def multi_head_scaled_dot_product_attention(q_h, k_h, v_h, mask=None):
     # The head dimension is treated as an additional batch dimension.
     return scaled_dot_product_attention(q_h, k_h, v_h, mask)
 
-# Step 30 - merge_heads_and_project_output (not yet solved)
-# TODO: implement
+# Step 30 - merge_heads_and_project_output
+def merge_heads_and_project_output(context, w_o, b_o):
+    # Merge (B, num_heads, L, d_k) into (B, L, d_model).
+    merged = merge_heads_back_to_model_dim(context)
+
+    # Apply the final output projection.
+    return apply_linear_projection(merged, w_o, b_o)
 
 # Step 31 - assemble_multi_head_attention_forward (not yet solved)
 # TODO: implement
