@@ -125,8 +125,13 @@ def build_causal_mask(seq_len):
         torch.ones((seq_len, seq_len), dtype=torch.bool)
     ).unsqueeze(0).unsqueeze(0)
 
-# Step 16 - combine_padding_and_causal_masks (not yet solved)
-# TODO: implement
+# Step 16 - combine_padding_and_causal_masks
+def combine_padding_and_causal_masks(padding_mask, causal_mask):
+    # Combine the masks using broadcasting.
+    # padding_mask: (B, 1, 1, L)
+    # causal_mask:  (1, 1, L, L)
+    # result:       (B, 1, L, L)
+    return padding_mask & causal_mask
 
 # Step 17 - compute_raw_attention_scores (not yet solved)
 # TODO: implement

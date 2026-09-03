@@ -25,7 +25,7 @@ python scaffold.py
 - [x] **13.** add_positional_encoding_to_embeddings
 - [x] **14.** build_padding_mask
 - [x] **15.** build_causal_mask
-- [ ] **16.** combine_padding_and_causal_masks
+- [x] **16.** combine_padding_and_causal_masks
 - [ ] **17.** compute_raw_attention_scores
 - [ ] **18.** scale_attention_scores
 - [ ] **19.** mask_attention_scores_with_neg_inf
