@@ -67,8 +67,12 @@ def scale_embeddings_by_sqrt_d_model(embeddings, d_model):
     """Scale a token embedding tensor by sqrt(d_model)."""
     return embeddings * math.sqrt(d_model)
 
-# Step 8 - compute_positional_div_term (not yet solved)
-# TODO: implement
+# Step 8 - compute_positional_div_term
+def compute_positional_div_term(d_model):
+    # Frequency divisors for even feature indices:
+    # exp(-log(10000) * (2k / d_model)), k = 0, 1, ..., d_model//2 - 1.
+    k = torch.arange(0, d_model // 2, dtype=torch.float32)
+    return torch.exp(-torch.log(torch.tensor(10000.0)) * (2 * k / d_model))
 
 # Step 9 - build_position_index_column (not yet solved)
 # TODO: implement
