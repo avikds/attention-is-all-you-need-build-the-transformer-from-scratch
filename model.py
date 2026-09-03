@@ -60,8 +60,12 @@ def stack_padded_sequences_to_batch(padded_sequences):
     """Stack a list of equal-length padded id sequences into a 2D LongTensor batch."""
     return torch.tensor(padded_sequences, dtype=torch.long)
 
-# Step 7 - scale_embeddings_by_sqrt_d_model (not yet solved)
-# TODO: implement
+# Step 7 - scale_embeddings_by_sqrt_d_model
+import math
+
+def scale_embeddings_by_sqrt_d_model(embeddings, d_model):
+    """Scale a token embedding tensor by sqrt(d_model)."""
+    return embeddings * math.sqrt(d_model)
 
 # Step 8 - compute_positional_div_term (not yet solved)
 # TODO: implement
