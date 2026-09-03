@@ -859,8 +859,17 @@ def collect_model_parameters_into_list(
 
     return params
 
-# Step 56 - shift_targets_right_with_start_token (not yet solved)
-# TODO: implement
+# Step 56 - shift_targets_right_with_start_token
+def shift_targets_right_with_start_token(target_ids, start_token_id):
+    # Create a tensor filled with the start token, preserving
+    # the input dtype and device.
+    shifted = target_ids.new_full(target_ids.shape, start_token_id)
+
+    # Shift the target ids one position to the right.
+    if target_ids.size(1) > 1:
+        shifted[:, 1:] = target_ids[:, :-1]
+
+    return shifted
 
 # Step 57 - compute_noam_learning_rate (not yet solved)
 # TODO: implement
