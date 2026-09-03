@@ -1263,8 +1263,24 @@ def compute_candidate_scores(beam_scores, next_token_log_probs):
     # and add the next-token log probabilities.
     return beam_scores.unsqueeze(-1) + next_token_log_probs
 
-# Step 77 - select_top_k_candidates (not yet solved)
-# TODO: implement
+# Step 77 - select_top_k_candidates
+def select_top_k_candidates(candidate_scores, k):
+    # Flatten the beam and vocabulary dimensions.
+    flat_scores = candidate_scores.reshape(-1)
+
+    # Select the k highest-scoring candidates in descending order.
+    top_scores, top_indices = torch.topk(flat_scores, k=k, dim=0)
+
+    # Recover the original beam index and token ID from each flattened index.
+    vocab_size = candidate_scores.size(1)
+    beam_indices = top_indices // vocab_size
+    token_ids = top_indices % vocab_size
+
+    return {
+        "beam_indices": beam_indices.to(torch.long),
+        "token_ids": token_ids.to(torch.long),
+        "scores": top_scores,
+    }
 
 # Step 78 - append_tokens_to_beam_sequences (not yet solved)
 # TODO: implement
