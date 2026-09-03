@@ -49,7 +49,7 @@ python scaffold.py
 - [x] **37.** apply_residual_add_and_norm
 - [x] **38.** apply_dropout_with_keep_mask
 - [x] **39.** encoder_layer_self_attention_sublayer
-- [ ] **40.** encoder_layer_feed_forward_sublayer
+- [x] **40.** encoder_layer_feed_forward_sublayer
 - [ ] **41.** assemble_encoder_layer
 - [ ] **42.** stack_encoder_layers
 - [ ] **43.** decoder_layer_masked_self_attention_sublayer

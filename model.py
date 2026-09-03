@@ -370,8 +370,20 @@ def encoder_layer_self_attention_sublayer(
         beta,
     )
 
-# Step 40 - encoder_layer_feed_forward_sublayer (not yet solved)
-# TODO: implement
+# Step 40 - encoder_layer_feed_forward_sublayer
+def encoder_layer_feed_forward_sublayer(x, w1, b1, w2, b2, gamma, beta):
+    # Run the position-wise feed-forward network.
+    ffn_output = position_wise_feed_forward_network(
+        x, w1, b1, w2, b2
+    )
+
+    # Apply the residual connection followed by layer normalization.
+    return apply_residual_add_and_norm(
+        x,
+        ffn_output,
+        gamma,
+        beta,
+    )
 
 # Step 41 - assemble_encoder_layer (not yet solved)
 # TODO: implement
