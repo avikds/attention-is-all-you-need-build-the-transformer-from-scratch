@@ -37,8 +37,11 @@ def encode_sentence_to_ids(sentence, token_to_id, unk_token='<unk>'):
     # Unknown tokens fall back to unk_id.
     return [token_to_id.get(token, unk_id) for token in sentence.split()]
 
-# Step 4 - decode_ids_to_tokens (not yet solved)
-# TODO: implement
+# Step 4 - decode_ids_to_tokens
+def decode_ids_to_tokens(ids, id_to_token):
+    # Map each token ID to its corresponding token string,
+    # preserving the original order.
+    return [id_to_token[idx] for idx in ids]
 
 # Step 5 - pad_id_sequence (not yet solved)
 # TODO: implement
