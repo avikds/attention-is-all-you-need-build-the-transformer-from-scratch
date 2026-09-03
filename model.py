@@ -871,8 +871,18 @@ def shift_targets_right_with_start_token(target_ids, start_token_id):
 
     return shifted
 
-# Step 57 - compute_noam_learning_rate (not yet solved)
-# TODO: implement
+# Step 57 - compute_noam_learning_rate
+def compute_noam_learning_rate(step, d_model, warmup_steps):
+    # Noam schedule from the original Transformer:
+    # lr = d_model^(-0.5) * min(step^(-0.5),
+    #                            step * warmup_steps^(-1.5))
+    return float(
+        d_model ** (-0.5)
+        * min(
+            step ** (-0.5),
+            step * warmup_steps ** (-1.5),
+        )
+    )
 
 # Step 58 - build_uniform_smoothing_distribution (not yet solved)
 # TODO: implement

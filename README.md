@@ -66,7 +66,7 @@ python scaffold.py
 - [x] **54.** init_embedding_and_projection_parameters
 - [x] **55.** collect_model_parameters_into_list
 - [x] **56.** shift_targets_right_with_start_token
-- [ ] **57.** compute_noam_learning_rate
+- [x] **57.** compute_noam_learning_rate
 - [ ] **58.** build_uniform_smoothing_distribution
 - [ ] **59.** set_confidence_on_gold_tokens
 - [ ] **60.** zero_pad_column_and_pad_token_rows
