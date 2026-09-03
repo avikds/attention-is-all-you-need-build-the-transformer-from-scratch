@@ -1070,8 +1070,6 @@ def zero_all_parameter_gradients(parameter_list):
             param.grad = None
 
 # Step 71 - compute_batch_training_loss
-import torch
-
 def compute_batch_training_loss(src_batch, tgt_batch, model_params, config):
     # Read configuration values.
     pad_id = config["pad_id"]
