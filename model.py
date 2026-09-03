@@ -919,8 +919,21 @@ def set_confidence_on_gold_tokens(
 
     return result
 
-# Step 60 - zero_pad_column_and_pad_token_rows (not yet solved)
-# TODO: implement
+# Step 60 - zero_pad_column_and_pad_token_rows
+def zero_pad_column_and_pad_token_rows(
+    smoothed_distribution, gold_token_ids, pad_id
+):
+    # Clone so the input distribution is not modified in place.
+    result = smoothed_distribution.clone()
+
+    # Zero the padding-token column across all batch/time positions.
+    result[..., pad_id] = 0.0
+
+    # Zero entire rows whose gold target is the padding token.
+    pad_rows = gold_token_ids == pad_id
+    result[pad_rows] = 0.0
+
+    return result
 
 # Step 61 - compute_label_smoothed_kl_loss (not yet solved)
 # TODO: implement
