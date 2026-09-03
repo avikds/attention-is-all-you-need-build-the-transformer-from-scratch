@@ -944,8 +944,6 @@ def compute_label_smoothed_kl_loss(log_probabilities, smoothed_distribution):
     return torch.where(loss == 0, torch.zeros_like(loss), loss)
 
 # Step 62 - average_loss_over_non_pad_tokens
-import torch
-
 def average_loss_over_non_pad_tokens(total_loss, gold_token_ids, pad_id):
     # Count target positions that are not padding.
     non_pad_count = (gold_token_ids != pad_id).sum()
