@@ -227,8 +227,14 @@ def apply_linear_projection(x, weight, bias):
 
     return output
 
-# Step 27 - project_to_query_key_value (not yet solved)
-# TODO: implement
+# Step 27 - project_to_query_key_value
+def project_to_query_key_value(x, w_q, b_q, w_k, b_k, w_v, b_v):
+    # Apply the three independent linear projections.
+    q = apply_linear_projection(x, w_q, b_q)
+    k = apply_linear_projection(x, w_k, b_k)
+    v = apply_linear_projection(x, w_v, b_v)
+
+    return q, k, v
 
 # Step 28 - split_qkv_into_heads (not yet solved)
 # TODO: implement
