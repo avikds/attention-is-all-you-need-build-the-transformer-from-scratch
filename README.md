@@ -56,7 +56,7 @@ python scaffold.py
 - [x] **44.** decoder_layer_cross_attention_sublayer
 - [x] **45.** decoder_layer_feed_forward_sublayer
 - [x] **46.** assemble_decoder_layer
-- [ ] **47.** stack_decoder_layers
+- [x] **47.** stack_decoder_layers
 - [ ] **48.** apply_final_output_projection
 - [ ] **49.** tie_output_projection_to_token_embeddings
 - [ ] **50.** apply_log_softmax_over_vocab
