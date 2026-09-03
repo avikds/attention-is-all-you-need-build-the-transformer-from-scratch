@@ -1147,8 +1147,6 @@ def compute_batch_training_loss(src_batch, tgt_batch, model_params, config):
     )
 
 # Step 72 - run_training_step_with_backprop
-import torch
-
 def run_training_step_with_backprop(
     src_batch,
     tgt_batch,
