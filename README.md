@@ -88,7 +88,7 @@ python scaffold.py
 - [x] **77.** select_top_k_candidates
 - [x] **78.** append_tokens_to_beam_sequences
 - [x] **79.** mark_finished_beams
-- [ ] **80.** select_best_finished_beam
+- [x] **80.** select_best_finished_beam
 
 ---
 
