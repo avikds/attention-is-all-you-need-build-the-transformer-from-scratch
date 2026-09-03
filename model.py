@@ -746,8 +746,59 @@ def init_encoder_layer_parameters(d_model, num_heads, d_ff):
         "ffn_beta": make_zero(d_model),
     }
 
-# Step 53 - init_decoder_layer_parameters (not yet solved)
-# TODO: implement
+# Step 53 - init_decoder_layer_parameters
+def init_decoder_layer_parameters(d_model, num_heads, d_ff):
+    # Initialize all learnable parameters for one decoder layer.
+    # Attention and FFN weights use a standard normal initialization
+    # scaled by 1 / sqrt(d_model).
+    init_std = 1.0 / (d_model ** 0.5)
+
+    def make_weight(*shape):
+        return (
+            torch.randn(*shape, dtype=torch.float32) * init_std
+        ).requires_grad_()
+
+    def make_zero(*shape):
+        return torch.zeros(
+            *shape, dtype=torch.float32, requires_grad=True
+        )
+
+    def make_one(*shape):
+        return torch.ones(
+            *shape, dtype=torch.float32, requires_grad=True
+        )
+
+    return {
+        # Masked self-attention projections.
+        "w_q_self": make_weight(d_model, d_model),
+        "w_k_self": make_weight(d_model, d_model),
+        "w_v_self": make_weight(d_model, d_model),
+        "w_o_self": make_weight(d_model, d_model),
+
+        # Encoder-decoder cross-attention projections.
+        "w_q_cross": make_weight(d_model, d_model),
+        "w_k_cross": make_weight(d_model, d_model),
+        "w_v_cross": make_weight(d_model, d_model),
+        "w_o_cross": make_weight(d_model, d_model),
+
+        # Position-wise feed-forward network.
+        "w1": make_weight(d_model, d_ff),
+        "b1": make_zero(d_ff),
+        "w2": make_weight(d_ff, d_model),
+        "b2": make_zero(d_model),
+
+        # LayerNorm after masked self-attention.
+        "self_gamma": make_one(d_model),
+        "self_beta": make_zero(d_model),
+
+        # LayerNorm after cross-attention.
+        "cross_gamma": make_one(d_model),
+        "cross_beta": make_zero(d_model),
+
+        # LayerNorm after the FFN.
+        "ffn_gamma": make_one(d_model),
+        "ffn_beta": make_zero(d_model),
+    }
 
 # Step 54 - init_embedding_and_projection_parameters (not yet solved)
 # TODO: implement
