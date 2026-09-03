@@ -35,7 +35,7 @@ python scaffold.py
 - [x] **23.** split_last_dim_into_heads
 - [x] **24.** transpose_heads_before_sequence
 - [x] **25.** merge_heads_back_to_model_dim
-- [ ] **26.** apply_linear_projection
+- [x] **26.** apply_linear_projection
 - [ ] **27.** project_to_query_key_value
 - [ ] **28.** split_qkv_into_heads
 - [ ] **29.** multi_head_scaled_dot_product_attention

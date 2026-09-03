@@ -216,8 +216,16 @@ def merge_heads_back_to_model_dim(multi_head_tensor):
         .reshape(batch_size, seq_len, num_heads * d_k)
     )
 
-# Step 26 - apply_linear_projection (not yet solved)
-# TODO: implement
+# Step 26 - apply_linear_projection
+def apply_linear_projection(x, weight, bias):
+    # Apply the affine transformation:
+    # y = x @ weight.T + bias
+    output = x @ weight.transpose(-2, -1)
+
+    if bias is not None:
+        output = output + bias
+
+    return output
 
 # Step 27 - project_to_query_key_value (not yet solved)
 # TODO: implement
