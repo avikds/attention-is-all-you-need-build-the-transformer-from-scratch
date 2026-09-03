@@ -78,7 +78,7 @@ python scaffold.py
 - [x] **66.** update_adam_second_moment
 - [x] **67.** apply_adam_bias_correction
 - [x] **69.** apply_adam_step_to_all_parameters
-- [ ] **70.** zero_all_parameter_gradients
+- [x] **70.** zero_all_parameter_gradients
 - [ ] **71.** compute_batch_training_loss
 - [ ] **72.** run_training_step_with_backprop
 - [ ] **73.** run_training_loop_for_steps
