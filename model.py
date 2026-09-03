@@ -826,8 +826,38 @@ def init_embedding_and_projection_parameters(vocab_size, d_model, tie_weights=Tr
         "output_projection": output_projection,
     }
 
-# Step 55 - collect_model_parameters_into_list (not yet solved)
-# TODO: implement
+# Step 55 - collect_model_parameters_into_list
+def collect_model_parameters_into_list(
+    encoder_layer_params,
+    decoder_layer_params,
+    embedding_params,
+):
+    # Collect parameters in the required order while removing
+    # duplicate tensor objects (e.g. tied embeddings/projection).
+    params = []
+    seen = set()
+
+    def add_param(tensor):
+        tensor_id = id(tensor)
+        if tensor_id not in seen:
+            seen.add(tensor_id)
+            params.append(tensor)
+
+    # Encoder layers first, in layer order and dict insertion order.
+    for layer_params in encoder_layer_params:
+        for tensor in layer_params.values():
+            add_param(tensor)
+
+    # Decoder layers next, in layer order and dict insertion order.
+    for layer_params in decoder_layer_params:
+        for tensor in layer_params.values():
+            add_param(tensor)
+
+    # Embedding/projection parameters last, in dict insertion order.
+    for tensor in embedding_params.values():
+        add_param(tensor)
+
+    return params
 
 # Step 56 - shift_targets_right_with_start_token (not yet solved)
 # TODO: implement
