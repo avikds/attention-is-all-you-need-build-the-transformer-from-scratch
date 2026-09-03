@@ -322,8 +322,16 @@ def compute_layer_norm_mean_and_variance(x):
 
     return mean, variance
 
-# Step 36 - normalize_and_scale_with_gamma_beta (not yet solved)
-# TODO: implement
+# Step 36 - normalize_and_scale_with_gamma_beta
+def normalize_and_scale_with_gamma_beta(x, gamma, beta, eps=1e-5):
+    # Compute the mean and population variance along the last dimension.
+    mean, variance = compute_layer_norm_mean_and_variance(x)
+
+    # Normalize x with numerical stability from eps.
+    normalized = (x - mean) / torch.sqrt(variance + eps)
+
+    # Apply the learned affine transformation.
+    return gamma * normalized + beta
 
 # Step 37 - apply_residual_add_and_norm (not yet solved)
 # TODO: implement
