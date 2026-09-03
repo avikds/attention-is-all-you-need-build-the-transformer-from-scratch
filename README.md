@@ -47,7 +47,7 @@ python scaffold.py
 - [x] **35.** compute_layer_norm_mean_and_variance
 - [x] **36.** normalize_and_scale_with_gamma_beta
 - [x] **37.** apply_residual_add_and_norm
-- [ ] **38.** apply_dropout_with_keep_mask
+- [x] **38.** apply_dropout_with_keep_mask
 - [ ] **39.** encoder_layer_self_attention_sublayer
 - [ ] **40.** encoder_layer_feed_forward_sublayer
 - [ ] **41.** assemble_encoder_layer
