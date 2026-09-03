@@ -1069,8 +1069,84 @@ def zero_all_parameter_gradients(parameter_list):
             param.grad.detach_()
             param.grad = None
 
-# Step 71 - compute_batch_training_loss (not yet solved)
-# TODO: implement
+# Step 71 - compute_batch_training_loss
+import torch
+
+def compute_batch_training_loss(src_batch, tgt_batch, model_params, config):
+    # Read configuration values.
+    pad_id = config["pad_id"]
+    start_id = config["start_id"]
+    vocab_size = config["vocab_size"]
+    smoothing = config["smoothing"]
+    num_heads = config["num_heads"]
+
+    # Step 51 expects a unified token_embedding parameter.
+    # Step 54 provides tgt_embedding instead, so expose the same tensor
+    # under the name expected by the forward function.
+    if "token_embedding" not in model_params:
+        model_params["token_embedding"] = model_params["tgt_embedding"]
+
+    # Build teacher-forced decoder input by shifting the gold target
+    # sequence one position to the right and inserting start_id.
+    decoder_input = shift_targets_right_with_start_token(
+        tgt_batch,
+        start_id,
+    )
+
+    # Build the parameter dictionary expected by run_transformer_forward.
+    #
+    # output_projection must remain (vocab_size, d_model), because
+    # apply_linear_projection performs weight.T internally.
+    forward_params = {
+        "token_embedding": model_params["token_embedding"],
+        "encoder_layers": model_params["encoder_layers"],
+        "decoder_layers": model_params["decoder_layers"],
+        "output_projection": model_params["output_projection"],
+    }
+
+    # Run the teacher-forced Transformer forward pass.
+    log_probabilities = run_transformer_forward(
+        src_batch,
+        decoder_input,
+        forward_params,
+        num_heads,
+        pad_id,
+    )
+
+    # Construct the uniformly smoothed target distribution using
+    # the unshifted gold target tokens.
+    smoothed_distribution = build_uniform_smoothing_distribution(
+        tgt_batch.shape + (vocab_size,),
+        vocab_size,
+        smoothing,
+    )
+
+    # Put confidence mass on each gold token.
+    smoothed_distribution = set_confidence_on_gold_tokens(
+        smoothed_distribution,
+        tgt_batch,
+        1.0 - smoothing,
+    )
+
+    # Remove all contribution from the padding token and padding rows.
+    smoothed_distribution = zero_pad_column_and_pad_token_rows(
+        smoothed_distribution,
+        tgt_batch,
+        pad_id,
+    )
+
+    # Compute the summed label-smoothed loss.
+    total_loss = compute_label_smoothed_kl_loss(
+        log_probabilities,
+        smoothed_distribution,
+    )
+
+    # Average over non-padding target tokens.
+    return average_loss_over_non_pad_tokens(
+        total_loss,
+        tgt_batch,
+        pad_id,
+    )
 
 # Step 72 - run_training_step_with_backprop (not yet solved)
 # TODO: implement
