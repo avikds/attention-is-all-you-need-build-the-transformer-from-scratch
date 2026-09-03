@@ -604,8 +604,18 @@ def stack_decoder_layers(
 
     return y
 
-# Step 48 - apply_final_output_projection (not yet solved)
-# TODO: implement
+# Step 48 - apply_final_output_projection
+def apply_final_output_projection(
+    decoder_output,
+    output_projection_weight,
+    output_projection_bias=None,
+):
+    # Project decoder hidden states from d_model to vocabulary logits.
+    return apply_linear_projection(
+        decoder_output,
+        output_projection_weight,
+        output_projection_bias,
+    )
 
 # Step 49 - tie_output_projection_to_token_embeddings (not yet solved)
 # TODO: implement
