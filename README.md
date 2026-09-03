@@ -81,7 +81,7 @@ python scaffold.py
 - [x] **70.** zero_all_parameter_gradients
 - [x] **71.** compute_batch_training_loss
 - [x] **72.** run_training_step_with_backprop
-- [ ] **73.** run_training_loop_for_steps
+- [x] **73.** run_training_loop_for_steps
 - [ ] **74.** pick_next_token_by_argmax
 - [ ] **75.** compute_length_penalty
 - [ ] **76.** compute_candidate_scores
