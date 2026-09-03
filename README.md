@@ -73,7 +73,7 @@ python scaffold.py
 - [x] **61.** compute_label_smoothed_kl_loss
 - [x] **62.** average_loss_over_non_pad_tokens
 - [x] **63.** compute_token_accuracy_ignoring_pad
-- [ ] **64.** initialize_adam_optimizer_state
+- [x] **64.** initialize_adam_optimizer_state
 - [ ] **65.** update_adam_first_moment
 - [ ] **66.** update_adam_second_moment
 - [ ] **67.** apply_adam_bias_correction
