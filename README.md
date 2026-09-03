@@ -22,7 +22,7 @@ python scaffold.py
 - [x] **10.** fill_even_indices_with_sin
 - [x] **11.** fill_odd_indices_with_cos
 - [x] **12.** build_sinusoidal_positional_encoding
-- [ ] **13.** add_positional_encoding_to_embeddings
+- [x] **13.** add_positional_encoding_to_embeddings
 - [ ] **14.** build_padding_mask
 - [ ] **15.** build_causal_mask
 - [ ] **16.** combine_padding_and_causal_masks
