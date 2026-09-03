@@ -50,7 +50,7 @@ python scaffold.py
 - [x] **38.** apply_dropout_with_keep_mask
 - [x] **39.** encoder_layer_self_attention_sublayer
 - [x] **40.** encoder_layer_feed_forward_sublayer
-- [ ] **41.** assemble_encoder_layer
+- [x] **41.** assemble_encoder_layer
 - [ ] **42.** stack_encoder_layers
 - [ ] **43.** decoder_layer_masked_self_attention_sublayer
 - [ ] **44.** decoder_layer_cross_attention_sublayer
