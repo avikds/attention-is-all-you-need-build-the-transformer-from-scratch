@@ -1257,8 +1257,11 @@ def compute_length_penalty(sequence_length, alpha):
     # ((5 + length) / 6) ** alpha
     return float(((5.0 + sequence_length) / 6.0) ** alpha)
 
-# Step 76 - compute_candidate_scores (not yet solved)
-# TODO: implement
+# Step 76 - compute_candidate_scores
+def compute_candidate_scores(beam_scores, next_token_log_probs):
+    # Broadcast each beam's cumulative score across the vocabulary axis
+    # and add the next-token log probabilities.
+    return beam_scores.unsqueeze(-1) + next_token_log_probs
 
 # Step 77 - select_top_k_candidates (not yet solved)
 # TODO: implement
