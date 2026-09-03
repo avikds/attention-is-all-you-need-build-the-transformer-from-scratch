@@ -63,7 +63,7 @@ python scaffold.py
 - [x] **51.** run_transformer_forward
 - [x] **52.** init_encoder_layer_parameters
 - [x] **53.** init_decoder_layer_parameters
-- [ ] **54.** init_embedding_and_projection_parameters
+- [x] **54.** init_embedding_and_projection_parameters
 - [ ] **55.** collect_model_parameters_into_list
 - [ ] **56.** shift_targets_right_with_start_token
 - [ ] **57.** compute_noam_learning_rate
