@@ -507,8 +507,80 @@ def decoder_layer_feed_forward_sublayer(y, w1, b1, w2, b2, gamma, beta):
         beta,
     )
 
-# Step 46 - assemble_decoder_layer (not yet solved)
-# TODO: implement
+# Step 46 - assemble_decoder_layer
+def assemble_decoder_layer(
+    y, encoder_output, layer_params, num_heads, src_mask, tgt_mask
+):
+    """Run a full decoder layer: masked self-attention, cross-attention, then FFN."""
+
+    # The decoder parameter dictionary stores the attention weight matrices
+    # in layer order. Collect the 2-D tensors while leaving the explicitly
+    # named FFN parameters untouched.
+    attention_weights = [
+        value
+        for key, value in layer_params.items()
+        if key not in {"w1", "b1", "w2", "b2", "ffn_gamma", "ffn_beta"}
+        and getattr(value, "ndim", None) == 2
+    ]
+
+    # First four matrices belong to masked self-attention.
+    self_w_q, self_w_k, self_w_v, self_w_o = attention_weights[:4]
+
+    # Next four matrices belong to encoder-decoder cross-attention.
+    cross_w_q, cross_w_k, cross_w_v, cross_w_o = attention_weights[4:8]
+
+    # For attention LayerNorm parameters, use the remaining 1-D tensors
+    # in their stored order. The FFN gamma/beta are explicitly named and
+    # therefore excluded below.
+    attention_vectors = [
+        value
+        for key, value in layer_params.items()
+        if key not in {"w1", "b1", "w2", "b2", "ffn_gamma", "ffn_beta"}
+        and getattr(value, "ndim", None) == 1
+    ]
+
+    self_attn_gamma, self_attn_beta = attention_vectors[:2]
+    cross_attn_gamma, cross_attn_beta = attention_vectors[2:4]
+
+    # 1. Masked self-attention.
+    y = decoder_layer_masked_self_attention_sublayer(
+        y,
+        self_w_q,
+        self_w_k,
+        self_w_v,
+        self_w_o,
+        self_attn_gamma,
+        self_attn_beta,
+        num_heads,
+        tgt_mask,
+    )
+
+    # 2. Encoder-decoder cross-attention.
+    y = decoder_layer_cross_attention_sublayer(
+        y,
+        encoder_output,
+        cross_w_q,
+        cross_w_k,
+        cross_w_v,
+        cross_w_o,
+        cross_attn_gamma,
+        cross_attn_beta,
+        num_heads,
+        src_mask,
+    )
+
+    # 3. Feed-forward network.
+    y = decoder_layer_feed_forward_sublayer(
+        y,
+        layer_params["w1"],
+        layer_params["b1"],
+        layer_params["w2"],
+        layer_params["b2"],
+        layer_params["ffn_gamma"],
+        layer_params["ffn_beta"],
+    )
+
+    return y
 
 # Step 47 - stack_decoder_layers (not yet solved)
 # TODO: implement
