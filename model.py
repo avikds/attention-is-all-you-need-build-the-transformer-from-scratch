@@ -203,8 +203,18 @@ def transpose_heads_before_sequence(split_tensor):
     # Rearrange (B, L, num_heads, d_k) into (B, num_heads, L, d_k).
     return split_tensor.permute(0, 2, 1, 3)
 
-# Step 25 - merge_heads_back_to_model_dim (not yet solved)
-# TODO: implement
+# Step 25 - merge_heads_back_to_model_dim
+def merge_heads_back_to_model_dim(multi_head_tensor):
+    # Rearrange (B, num_heads, L, d_k) into (B, L, num_heads, d_k),
+    # then merge the final two dimensions into d_model.
+    batch_size, num_heads, seq_len, d_k = multi_head_tensor.shape
+
+    return (
+        multi_head_tensor
+        .permute(0, 2, 1, 3)
+        .contiguous()
+        .reshape(batch_size, seq_len, num_heads * d_k)
+    )
 
 # Step 26 - apply_linear_projection (not yet solved)
 # TODO: implement
