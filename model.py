@@ -28,8 +28,14 @@ def build_id_to_token_vocab(token_to_id):
     # Build the inverse mapping: id -> token.
     return {idx: token for token, idx in token_to_id.items()}
 
-# Step 3 - encode_sentence_to_ids (not yet solved)
-# TODO: implement
+# Step 3 - encode_sentence_to_ids
+def encode_sentence_to_ids(sentence, token_to_id, unk_token='<unk>'):
+    # Get the ID used for unknown/out-of-vocabulary tokens.
+    unk_id = token_to_id[unk_token]
+
+    # Convert each whitespace-separated token to its vocabulary ID.
+    # Unknown tokens fall back to unk_id.
+    return [token_to_id.get(token, unk_id) for token in sentence.split()]
 
 # Step 4 - decode_ids_to_tokens (not yet solved)
 # TODO: implement
