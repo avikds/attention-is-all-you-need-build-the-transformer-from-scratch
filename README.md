@@ -70,7 +70,7 @@ python scaffold.py
 - [x] **58.** build_uniform_smoothing_distribution
 - [x] **59.** set_confidence_on_gold_tokens
 - [x] **60.** zero_pad_column_and_pad_token_rows
-- [ ] **61.** compute_label_smoothed_kl_loss
+- [x] **61.** compute_label_smoothed_kl_loss
 - [ ] **62.** average_loss_over_non_pad_tokens
 - [ ] **63.** compute_token_accuracy_ignoring_pad
 - [ ] **64.** initialize_adam_optimizer_state
