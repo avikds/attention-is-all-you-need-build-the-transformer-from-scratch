@@ -884,8 +884,16 @@ def compute_noam_learning_rate(step, d_model, warmup_steps):
         )
     )
 
-# Step 58 - build_uniform_smoothing_distribution (not yet solved)
-# TODO: implement
+# Step 58 - build_uniform_smoothing_distribution
+def build_uniform_smoothing_distribution(shape, vocab_size, epsilon):
+    # Distribute the smoothing mass uniformly across vocab_size - 2 entries.
+    smoothing_value = epsilon / (vocab_size - 2)
+
+    return torch.full(
+        shape,
+        smoothing_value,
+        dtype=torch.float32,
+    )
 
 # Step 59 - set_confidence_on_gold_tokens (not yet solved)
 # TODO: implement
