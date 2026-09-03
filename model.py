@@ -312,8 +312,15 @@ def position_wise_feed_forward_network(x, w1, b1, w2, b2):
     # Second linear projection back to d_model.
     return apply_ffn_second_linear(hidden, w2, b2)
 
-# Step 35 - compute_layer_norm_mean_and_variance (not yet solved)
-# TODO: implement
+# Step 35 - compute_layer_norm_mean_and_variance
+def compute_layer_norm_mean_and_variance(x):
+    # Compute the mean over the last feature dimension.
+    mean = x.mean(dim=-1, keepdim=True)
+
+    # Compute the population (biased) variance over the last dimension.
+    variance = ((x - mean) ** 2).mean(dim=-1, keepdim=True)
+
+    return mean, variance
 
 # Step 36 - normalize_and_scale_with_gamma_beta (not yet solved)
 # TODO: implement
