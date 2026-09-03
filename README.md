@@ -80,7 +80,7 @@ python scaffold.py
 - [x] **69.** apply_adam_step_to_all_parameters
 - [x] **70.** zero_all_parameter_gradients
 - [x] **71.** compute_batch_training_loss
-- [ ] **72.** run_training_step_with_backprop
+- [x] **72.** run_training_step_with_backprop
 - [ ] **73.** run_training_loop_for_steps
 - [ ] **74.** pick_next_token_by_argmax
 - [ ] **75.** compute_length_penalty

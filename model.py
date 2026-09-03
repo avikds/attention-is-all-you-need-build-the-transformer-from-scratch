@@ -1146,8 +1146,67 @@ def compute_batch_training_loss(src_batch, tgt_batch, model_params, config):
         pad_id,
     )
 
-# Step 72 - run_training_step_with_backprop (not yet solved)
-# TODO: implement
+# Step 72 - run_training_step_with_backprop
+import torch
+
+def run_training_step_with_backprop(
+    src_batch,
+    tgt_batch,
+    parameter_list,
+    model_params,
+    optimizer_state,
+    step_number,
+    config,
+):
+    """Run one training iteration: zero grads, forward, backward, Noam LR, Adam step.
+
+    Returns the scalar loss value for the step as a Python float.
+    """
+    # Clear gradients from the previous iteration.
+    zero_all_parameter_gradients(parameter_list)
+
+    # Compute the teacher-forced loss.
+    loss = compute_batch_training_loss(
+        src_batch,
+        tgt_batch,
+        model_params,
+        config,
+    )
+
+    # Backpropagate through the model.
+    loss.backward()
+
+    # Ensure every trainable parameter has a gradient tensor.
+    # Parameters not connected to this particular forward pass receive
+    # a zero gradient, while connected parameters retain their true gradient.
+    for param in parameter_list:
+        if param.requires_grad and param.grad is None:
+            param.grad = torch.zeros_like(param)
+
+    # Compute the Noam learning rate for this step.
+    learning_rate = compute_noam_learning_rate(
+        step_number,
+        config["d_model"],
+        config["warmup_steps"],
+    )
+
+    # Use configured Adam hyperparameters when supplied.
+    beta1 = config.get("beta1", 0.9)
+    beta2 = config.get("beta2", 0.98)
+    epsilon = config.get("epsilon", 1e-9)
+
+    # Apply one Adam update.
+    apply_adam_step_to_all_parameters(
+        parameter_list,
+        optimizer_state,
+        learning_rate,
+        beta1=beta1,
+        beta2=beta2,
+        epsilon=epsilon,
+    )
+
+    # Return a Python float for logging.
+    return float(loss.detach().item())
 
 # Step 73 - run_training_loop_for_steps (not yet solved)
 # TODO: implement
