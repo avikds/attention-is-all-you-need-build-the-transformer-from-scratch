@@ -83,7 +83,7 @@ python scaffold.py
 - [x] **72.** run_training_step_with_backprop
 - [x] **73.** run_training_loop_for_steps
 - [x] **74.** pick_next_token_by_argmax
-- [ ] **75.** compute_length_penalty
+- [x] **75.** compute_length_penalty
 - [ ] **76.** compute_candidate_scores
 - [ ] **77.** select_top_k_candidates
 - [ ] **78.** append_tokens_to_beam_sequences
