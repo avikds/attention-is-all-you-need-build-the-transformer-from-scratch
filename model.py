@@ -236,8 +236,21 @@ def project_to_query_key_value(x, w_q, b_q, w_k, b_k, w_v, b_v):
 
     return q, k, v
 
-# Step 28 - split_qkv_into_heads (not yet solved)
-# TODO: implement
+# Step 28 - split_qkv_into_heads
+def split_qkv_into_heads(q, k, v, num_heads):
+    # Split the last feature dimension into (num_heads, d_k),
+    # then move the head dimension before the sequence dimension.
+    q_h = transpose_heads_before_sequence(
+        split_last_dim_into_heads(q, num_heads)
+    )
+    k_h = transpose_heads_before_sequence(
+        split_last_dim_into_heads(k, num_heads)
+    )
+    v_h = transpose_heads_before_sequence(
+        split_last_dim_into_heads(v, num_heads)
+    )
+
+    return q_h, k_h, v_h
 
 # Step 29 - multi_head_scaled_dot_product_attention (not yet solved)
 # TODO: implement
