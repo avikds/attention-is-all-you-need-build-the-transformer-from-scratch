@@ -29,7 +29,7 @@ python scaffold.py
 - [x] **17.** compute_raw_attention_scores
 - [x] **18.** scale_attention_scores
 - [x] **19.** mask_attention_scores_with_neg_inf
-- [ ] **20.** softmax_attention_weights
+- [x] **20.** softmax_attention_weights
 - [ ] **21.** apply_attention_weights_to_values
 - [ ] **22.** scaled_dot_product_attention
 - [ ] **23.** split_last_dim_into_heads
