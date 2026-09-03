@@ -41,7 +41,7 @@ python scaffold.py
 - [x] **29.** multi_head_scaled_dot_product_attention
 - [x] **30.** merge_heads_and_project_output
 - [x] **31.** assemble_multi_head_attention_forward
-- [ ] **32.** apply_ffn_first_linear_and_relu
+- [x] **32.** apply_ffn_first_linear_and_relu
 - [ ] **33.** apply_ffn_second_linear
 - [ ] **34.** position_wise_feed_forward_network
 - [ ] **35.** compute_layer_norm_mean_and_variance

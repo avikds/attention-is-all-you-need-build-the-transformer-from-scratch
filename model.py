@@ -292,8 +292,12 @@ def assemble_multi_head_attention_forward(
     # Merge the heads and apply the final output projection.
     return merge_heads_and_project_output(context, w_o, None)
 
-# Step 32 - apply_ffn_first_linear_and_relu (not yet solved)
-# TODO: implement
+# Step 32 - apply_ffn_first_linear_and_relu
+import torch
+
+def apply_ffn_first_linear_and_relu(x, w1, b1):
+    # Project from d_model to d_ff, then apply ReLU.
+    return torch.relu(x @ w1 + b1)
 
 # Step 33 - apply_ffn_second_linear (not yet solved)
 # TODO: implement
