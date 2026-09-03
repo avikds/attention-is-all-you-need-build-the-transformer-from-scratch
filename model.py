@@ -190,8 +190,13 @@ def scaled_dot_product_attention(query, key, value, mask=None):
 
     return context, attention_weights
 
-# Step 23 - split_last_dim_into_heads (not yet solved)
-# TODO: implement
+# Step 23 - split_last_dim_into_heads
+def split_last_dim_into_heads(tensor, num_heads):
+    # Split the final feature dimension into (num_heads, d_k).
+    batch_size, seq_len, d_model = tensor.shape
+    d_k = d_model // num_heads
+
+    return tensor.reshape(batch_size, seq_len, num_heads, d_k)
 
 # Step 24 - transpose_heads_before_sequence (not yet solved)
 # TODO: implement
