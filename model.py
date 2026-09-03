@@ -991,8 +991,14 @@ def update_adam_first_moment(m_prev, grad, beta1):
     # Detach so the optimizer state does not track gradients.
     return (beta1 * m_prev + (1.0 - beta1) * grad).detach()
 
-# Step 66 - update_adam_second_moment (not yet solved)
-# TODO: implement
+# Step 66 - update_adam_second_moment
+def update_adam_second_moment(v_prev, grad, beta2):
+    """Return v_t = beta2 * v_prev + (1 - beta2) * grad ** 2."""
+    # Update the second moment using the squared gradient.
+    # Detach so the optimizer state does not track gradients.
+    return (
+        beta2 * v_prev + (1.0 - beta2) * (grad ** 2)
+    ).detach()
 
 # Step 67 - apply_adam_bias_correction (not yet solved)
 # TODO: implement
