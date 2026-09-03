@@ -33,7 +33,7 @@ python scaffold.py
 - [x] **21.** apply_attention_weights_to_values
 - [x] **22.** scaled_dot_product_attention
 - [x] **23.** split_last_dim_into_heads
-- [ ] **24.** transpose_heads_before_sequence
+- [x] **24.** transpose_heads_before_sequence
 - [ ] **25.** merge_heads_back_to_model_dim
 - [ ] **26.** apply_linear_projection
 - [ ] **27.** project_to_query_key_value
