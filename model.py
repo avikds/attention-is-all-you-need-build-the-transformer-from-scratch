@@ -252,8 +252,11 @@ def split_qkv_into_heads(q, k, v, num_heads):
 
     return q_h, k_h, v_h
 
-# Step 29 - multi_head_scaled_dot_product_attention (not yet solved)
-# TODO: implement
+# Step 29 - multi_head_scaled_dot_product_attention
+def multi_head_scaled_dot_product_attention(q_h, k_h, v_h, mask=None):
+    # Run scaled dot-product attention independently for each head.
+    # The head dimension is treated as an additional batch dimension.
+    return scaled_dot_product_attention(q_h, k_h, v_h, mask)
 
 # Step 30 - merge_heads_and_project_output (not yet solved)
 # TODO: implement
