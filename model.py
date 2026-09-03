@@ -266,8 +266,31 @@ def merge_heads_and_project_output(context, w_o, b_o):
     # Apply the final output projection.
     return apply_linear_projection(merged, w_o, b_o)
 
-# Step 31 - assemble_multi_head_attention_forward (not yet solved)
-# TODO: implement
+# Step 31 - assemble_multi_head_attention_forward
+def assemble_multi_head_attention_forward(
+    query, key, value, w_q, w_k, w_v, w_o, num_heads, mask=None
+):
+    # Project query, key, and value into their respective feature spaces.
+    q, _, _ = project_to_query_key_value(
+        query, w_q, None, w_k, None, w_v, None
+    )
+    _, k, _ = project_to_query_key_value(
+        key, w_q, None, w_k, None, w_v, None
+    )
+    _, _, v = project_to_query_key_value(
+        value, w_q, None, w_k, None, w_v, None
+    )
+
+    # Split the projected tensors into independent attention heads.
+    q_h, k_h, v_h = split_qkv_into_heads(q, k, v, num_heads)
+
+    # Run scaled dot-product attention independently across all heads.
+    context, _ = multi_head_scaled_dot_product_attention(
+        q_h, k_h, v_h, mask
+    )
+
+    # Merge the heads and apply the final output projection.
+    return merge_heads_and_project_output(context, w_o, None)
 
 # Step 32 - apply_ffn_first_linear_and_relu (not yet solved)
 # TODO: implement
