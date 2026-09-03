@@ -59,7 +59,7 @@ python scaffold.py
 - [x] **47.** stack_decoder_layers
 - [x] **48.** apply_final_output_projection
 - [x] **49.** tie_output_projection_to_token_embeddings
-- [ ] **50.** apply_log_softmax_over_vocab
+- [x] **50.** apply_log_softmax_over_vocab
 - [ ] **51.** run_transformer_forward
 - [ ] **52.** init_encoder_layer_parameters
 - [ ] **53.** init_decoder_layer_parameters

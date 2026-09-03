@@ -625,8 +625,10 @@ def tie_output_projection_to_token_embeddings(token_embedding_weight):
     """
     return token_embedding_weight.transpose(0, 1)
 
-# Step 50 - apply_log_softmax_over_vocab (not yet solved)
-# TODO: implement
+# Step 50 - apply_log_softmax_over_vocab
+def apply_log_softmax_over_vocab(logits):
+    # Apply log-softmax across the vocabulary dimension.
+    return torch.log_softmax(logits, dim=-1)
 
 # Step 51 - run_transformer_forward (not yet solved)
 # TODO: implement
