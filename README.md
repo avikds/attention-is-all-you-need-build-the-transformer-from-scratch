@@ -43,7 +43,7 @@ python scaffold.py
 - [x] **31.** assemble_multi_head_attention_forward
 - [x] **32.** apply_ffn_first_linear_and_relu
 - [x] **33.** apply_ffn_second_linear
-- [ ] **34.** position_wise_feed_forward_network
+- [x] **34.** position_wise_feed_forward_network
 - [ ] **35.** compute_layer_norm_mean_and_variance
 - [ ] **36.** normalize_and_scale_with_gamma_beta
 - [ ] **37.** apply_residual_add_and_norm
