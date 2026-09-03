@@ -702,8 +702,49 @@ def run_transformer_forward(
     # Convert logits to log probabilities over the vocabulary.
     return apply_log_softmax_over_vocab(logits)
 
-# Step 52 - init_encoder_layer_parameters (not yet solved)
-# TODO: implement
+# Step 52 - init_encoder_layer_parameters
+def init_encoder_layer_parameters(d_model, num_heads, d_ff):
+    """Return a dict of leaf tensors with requires_grad=True for one encoder layer."""
+
+    # Standard Transformer initialization scale.
+    init_std = 1.0 / math.sqrt(d_model)
+
+    def make_weight(*shape):
+        return (
+            torch.randn(*shape, dtype=torch.float32) * init_std
+        ).requires_grad_()
+
+    def make_zero(*shape):
+        return torch.zeros(
+            *shape, dtype=torch.float32, requires_grad=True
+        )
+
+    def make_one(*shape):
+        return torch.ones(
+            *shape, dtype=torch.float32, requires_grad=True
+        )
+
+    return {
+        # Self-attention projection matrices.
+        "w_q": make_weight(d_model, d_model),
+        "w_k": make_weight(d_model, d_model),
+        "w_v": make_weight(d_model, d_model),
+        "w_o": make_weight(d_model, d_model),
+
+        # Position-wise feed-forward network.
+        "w1": make_weight(d_model, d_ff),
+        "b1": make_zero(d_ff),
+        "w2": make_weight(d_ff, d_model),
+        "b2": make_zero(d_model),
+
+        # LayerNorm after self-attention.
+        "attn_gamma": make_one(d_model),
+        "attn_beta": make_zero(d_model),
+
+        # LayerNorm after the FFN.
+        "ffn_gamma": make_one(d_model),
+        "ffn_beta": make_zero(d_model),
+    }
 
 # Step 53 - init_decoder_layer_parameters (not yet solved)
 # TODO: implement
