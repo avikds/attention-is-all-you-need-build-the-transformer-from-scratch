@@ -451,8 +451,46 @@ def decoder_layer_masked_self_attention_sublayer(
         beta,
     )
 
-# Step 44 - decoder_layer_cross_attention_sublayer (not yet solved)
-# TODO: implement
+# Step 44 - decoder_layer_cross_attention_sublayer
+def decoder_layer_cross_attention_sublayer(
+    y,
+    encoder_output,
+    w_q,
+    w_k,
+    w_v,
+    w_o,
+    gamma,
+    beta,
+    num_heads,
+    src_mask,
+):
+    # Convert a simple (B, S) source padding mask into the
+    # broadcastable attention-mask shape (B, 1, 1, S).
+    if src_mask is not None and src_mask.dim() == 2:
+        src_mask = src_mask.unsqueeze(1).unsqueeze(2)
+
+    # Cross-attention:
+    # Q comes from the decoder state y,
+    # K and V come from the encoder output.
+    attention_output = assemble_multi_head_attention_forward(
+        y,
+        encoder_output,
+        encoder_output,
+        w_q,
+        w_k,
+        w_v,
+        w_o,
+        num_heads,
+        src_mask,
+    )
+
+    # Residual connection followed by layer normalization.
+    return apply_residual_add_and_norm(
+        y,
+        attention_output,
+        gamma,
+        beta,
+    )
 
 # Step 45 - decoder_layer_feed_forward_sublayer (not yet solved)
 # TODO: implement

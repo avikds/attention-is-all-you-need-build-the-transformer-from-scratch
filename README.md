@@ -53,7 +53,7 @@ python scaffold.py
 - [x] **41.** assemble_encoder_layer
 - [x] **42.** stack_encoder_layers
 - [x] **43.** decoder_layer_masked_self_attention_sublayer
-- [ ] **44.** decoder_layer_cross_attention_sublayer
+- [x] **44.** decoder_layer_cross_attention_sublayer
 - [ ] **45.** decoder_layer_feed_forward_sublayer
 - [ ] **46.** assemble_decoder_layer
 - [ ] **47.** stack_decoder_layers
