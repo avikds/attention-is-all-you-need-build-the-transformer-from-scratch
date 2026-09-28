@@ -77,6 +77,7 @@ python scaffold.py
 - [x] **65.** update_adam_first_moment
 - [x] **66.** update_adam_second_moment
 - [x] **67.** apply_adam_bias_correction
+- [x] **68.** compute_adam_parameter_update
 - [x] **69.** apply_adam_step_to_all_parameters
 - [x] **70.** zero_all_parameter_gradients
 - [x] **71.** compute_batch_training_loss
@@ -90,14 +91,6 @@ python scaffold.py
 - [x] **79.** mark_finished_beams
 - [x] **80.** select_best_finished_beam
 
-## Results
+---
 
-```
-Vocab size: 12; pad=0, bos=1, eos=2
-src_batch shape: (2, 4) tgt_batch shape: (2, 4)
-Total parameter tensors: 62
-log_probs shape: (2, 4, 12)
-loss trajectory: [10.3385, 8.4878, 6.6502, 5.5836, 4.4595, 3.6575]
-argmax next tokens per row: [1, 2]
-decoded: [['<bos>'], ['<eos>']]
-```
+Built on Deep-ML.
